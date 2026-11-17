@@ -1,0 +1,65 @@
+		(1)	(2)	(3)
+VARIABLES	LABELS	No FE	County FE	Year FE
+				
+lag_log_income	Log per capita income, t-1	1.123***	0.421***	4.456***
+		(0.0430)	(0.0576)	(0.0726)
+pct_bachelors	% adults 25+ bachelor's degree	0.0569***	-0.0208***	0.000598
+		(0.00146)	(0.00583)	(0.00160)
+broadband_rate	Broadband HH rate	-0.273**	-3.123***	1.231***
+		(0.130)	(0.181)	(0.135)
+lag_log_pop	Log population, t-1	-1.416***	-2.285***	-1.420***
+		(0.0110)	(0.149)	(0.0107)
+2002.year	FDIC SOD survey year (as of June 30) = 2002			-0.200***
+				(0.0546)
+2003.year	FDIC SOD survey year (as of June 30) = 2003			-0.291***
+				(0.0554)
+2004.year	FDIC SOD survey year (as of June 30) = 2004			-0.459***
+				(0.0552)
+2005.year	FDIC SOD survey year (as of June 30) = 2005			-0.637***
+				(0.0569)
+2006.year	FDIC SOD survey year (as of June 30) = 2006			-0.745***
+				(0.0578)
+2007.year	FDIC SOD survey year (as of June 30) = 2007			-0.849***
+				(0.0599)
+2008.year	FDIC SOD survey year (as of June 30) = 2008			-1.077***
+				(0.0602)
+2009.year	FDIC SOD survey year (as of June 30) = 2009			-1.320***
+				(0.0605)
+2010.year	FDIC SOD survey year (as of June 30) = 2010			-1.247***
+				(0.0603)
+2011.year	FDIC SOD survey year (as of June 30) = 2011			-1.250***
+				(0.0609)
+2012.year	FDIC SOD survey year (as of June 30) = 2012			-1.584***
+				(0.0612)
+2013.year	FDIC SOD survey year (as of June 30) = 2013			-1.761***
+				(0.0618)
+2014.year	FDIC SOD survey year (as of June 30) = 2014			-1.921***
+				(0.0618)
+2015.year	FDIC SOD survey year (as of June 30) = 2015			-2.097***
+				(0.0633)
+2016.year	FDIC SOD survey year (as of June 30) = 2016			-2.225***
+				(0.0647)
+2017.year	FDIC SOD survey year (as of June 30) = 2017			-2.283***
+				(0.0656)
+2018.year	FDIC SOD survey year (as of June 30) = 2018			-2.518***
+				(0.0668)
+2019.year	FDIC SOD survey year (as of June 30) = 2019			-2.772***
+				(0.0676)
+2020.year	FDIC SOD survey year (as of June 30) = 2020			-3.020***
+				(0.0685)
+2021.year	FDIC SOD survey year (as of June 30) = 2021			-3.496***
+				(0.0709)
+2022.year	FDIC SOD survey year (as of June 30) = 2022			-4.005***
+				(0.0736)
+2023.year	FDIC SOD survey year (as of June 30) = 2023			-4.160***
+				(0.0748)
+2024.year	FDIC SOD survey year (as of June 30) = 2024			-4.429***
+				(0.0759)
+Constant	Constant	6.416***	26.35***	-26.55***
+		(0.414)	(1.352)	(0.679)
+				
+Observations		73,334	73,334	73,334
+R-squared		0.383	0.084	0.445
+Number of fips_county			3,071	
+Robust standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

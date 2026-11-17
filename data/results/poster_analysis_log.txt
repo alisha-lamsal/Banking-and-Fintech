@@ -1,0 +1,3671 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\USER\Downloads\Poster_Output\Poster_Analysis_Log.txt
+  log type:  text
+ opened on:  19 Apr 2026, 01:05:12
+
+. 
+. di "POSTER ANALYSIS STARTED: " c(current_date) " " c(current_time)
+POSTER ANALYSIS STARTED: 19 Apr 2026 01:05:12
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 1: STACK ALL YEARLY SOD FILES
+>    One row per branch per year. UNINUMBR = unique branch identifier.
+> ====================================================================*/
+. 
+. clear
+
+. tempfile master
+
+. save `master', emptyok replace
+(note: dataset contains 0 observations)
+(note: file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp not found)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+
+. 
+. local n_files = 0
+
+. local filelist : dir "$sod_folder" files "*.csv"
+
+. 
+. foreach f of local filelist {
+  2. 
+.     di "  Importing: `f'"
+  3. 
+.     import delimited "$sod_folder\\`f'",  ///
+>         varnames(1) stringcols(_all)       ///
+>         bindquote(strict) encoding(utf-8)  ///
+>         clear
+  4. 
+.     capture confirm variable year
+  5.     if _rc != 0 {
+  6.         di "  WARNING: no YEAR variable - skipping `f'"
+  7.         continue
+  8.     }
+  9. 
+.     foreach v in year stcntybr cert uninumbr rssdid depsumbr sims_latitude sims_longitu
+> de {
+ 10.         capture confirm variable `v'
+ 11.         if _rc == 0 destring `v', replace force
+ 12.     }
+ 13. 
+.     append using `master'
+ 14.     save `master', replace
+ 15. 
+.     local n_files = `n_files' + 1
+ 16.     di "    -> OK (running total: " _N " obs)"
+ 17. }
+  Importing: sod_customdownload_all_1994_06_30 (1).csv
+(15 vars, 81,297 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(7828 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(17681 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(17681 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 81297 obs)
+  Importing: sod_customdownload_all_1995_06_30.csv
+(15 vars, 80,999 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(7022 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(16524 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(16524 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 162296 obs)
+  Importing: sod_customdownload_all_1996_06_30.csv
+(15 vars, 81,375 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(6563 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(15318 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(15318 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 243671 obs)
+  Importing: sod_customdownload_all_1997_06_30.csv
+(15 vars, 82,109 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5861 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(14130 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(14130 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 325780 obs)
+  Importing: sod_customdownload_all_1998_06_30.csv
+(15 vars, 83,314 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5582 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(13237 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(13237 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 409094 obs)
+  Importing: sod_customdownload_all_1999_06_30.csv
+(15 vars, 84,311 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5254 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(12424 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(12424 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 493405 obs)
+  Importing: sod_customdownload_all_2000_06_30.csv
+(15 vars, 85,489 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5205 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(11858 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(11858 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 578894 obs)
+  Importing: sod_customdownload_all_2001_06_30.csv
+(15 vars, 86,065 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5262 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(11466 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(11466 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 664959 obs)
+  Importing: sod_customdownload_all_2002_06_30.csv
+(15 vars, 86,576 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(5049 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(10552 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(10552 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 751535 obs)
+  Importing: sod_customdownload_all_2003_06_30.csv
+(15 vars, 87,785 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(8304 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(12935 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(12935 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 839320 obs)
+  Importing: sod_customdownload_all_2004_06_30.csv
+(15 vars, 89,785 obs)
+year: all characters numeric; replaced as int
+stcntybr: contains nonnumeric characters; replaced as long
+(1 missing value generated)
+cert: all characters numeric; replaced as long
+uninumbr: contains nonnumeric characters; replaced as long
+(8415 missing values generated)
+rssdid: contains nonnumeric characters; replaced as long
+(1 missing value generated)
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(12428 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(12428 missing values generated)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 929105 obs)
+  Importing: sod_customdownload_all_2005_06_30.csv
+(15 vars, 92,043 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(9124 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(12464 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(12464 missing values generated)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1021148 obs)
+  Importing: sod_customdownload_all_2006_06_30.csv
+(15 vars, 94,752 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(9341 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(12469 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(12469 missing values generated)
+(note: variable namefull was str67, now str72 to accommodate using data's values)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1115900 obs)
+  Importing: sod_customdownload_all_2007_06_30.csv
+(15 vars, 97,273 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(9199 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(11965 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(11965 missing values generated)
+(note: variable namefull was str67, now str72 to accommodate using data's values)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1213173 obs)
+  Importing: sod_customdownload_all_2008_06_30.csv
+(15 vars, 99,162 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(9221 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(15369 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(15369 missing values generated)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1312335 obs)
+  Importing: sod_customdownload_all_2009_06_30.csv
+(15 vars, 99,550 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(6902 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(11924 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(11924 missing values generated)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1411885 obs)
+  Importing: sod_customdownload_all_2010_06_30.csv
+(15 vars, 98,520 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+(6128 missing values generated)
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(9177 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(9177 missing values generated)
+(note: variable brnum was str4, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1510405 obs)
+  Importing: sod_customdownload_all_2011_06_30.csv
+(15 vars, 98,194 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(624 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(624 missing values generated)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1608599 obs)
+  Importing: sod_customdownload_all_2012_06_30.csv
+(15 vars, 97,341 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(768 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(768 missing values generated)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1705940 obs)
+  Importing: sod_customdownload_all_2013_06_30.csv
+(15 vars, 96,340 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(1207 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(1207 missing values generated)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1802280 obs)
+  Importing: sod_customdownload_all_2014_06_30.csv
+(15 vars, 94,725 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(1397 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(1397 missing values generated)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1897005 obs)
+  Importing: sod_customdownload_all_2015_06_30.csv
+(15 vars, 93,272 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(684 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(684 missing values generated)
+(note: variable namefull was str67, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 1990277 obs)
+  Importing: sod_customdownload_all_2016_06_30.csv
+(15 vars, 91,834 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(98 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(100 missing values generated)
+(note: variable namefull was str67, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2082111 obs)
+  Importing: sod_customdownload_all_2017_06_30.csv
+(15 vars, 89,849 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(223 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(225 missing values generated)
+(note: variable namefull was str68, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2171960 obs)
+  Importing: sod_customdownload_all_2018_06_30.csv
+(15 vars, 88,075 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+sims_longitude: all characters numeric; replaced as double
+(2 missing values generated)
+(note: variable namefull was str68, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2260035 obs)
+  Importing: sod_customdownload_all_2019_06_30.csv
+(15 vars, 86,392 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(2 missing values generated)
+sims_longitude: all characters numeric; replaced as double
+(2 missing values generated)
+(note: variable namefull was str68, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2346427 obs)
+  Importing: sod_customdownload_all_2020_06_30.csv
+(15 vars, 84,982 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+sims_longitude: all characters numeric; replaced as double
+(note: variable namefull was str66, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2431409 obs)
+  Importing: sod_customdownload_all_2021_06_30.csv
+(15 vars, 81,791 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+sims_longitude: all characters numeric; replaced as double
+(note: variable namefull was str66, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2513200 obs)
+  Importing: sod_customdownload_all_2022_06_30.csv
+(15 vars, 79,172 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(1 missing value generated)
+sims_longitude: all characters numeric; replaced as double
+(1 missing value generated)
+(note: variable namefull was str66, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable cntynamb was str23, now str24 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2592372 obs)
+  Importing: sod_customdownload_all_2023_06_30.csv
+(15 vars, 77,770 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+sims_longitude: all characters numeric; replaced as double
+(note: variable namefull was str69, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2670142 obs)
+  Importing: sod_customdownload_all_2024_06_30.csv
+(15 vars, 76,727 obs)
+year: all characters numeric; replaced as int
+stcntybr: all characters numeric; replaced as long
+cert: all characters numeric; replaced as long
+uninumbr: all characters numeric; replaced as long
+rssdid: all characters numeric; replaced as long
+depsumbr: all characters numeric; replaced as long
+sims_latitude: all characters numeric; replaced as double
+(1 missing value generated)
+sims_longitude: all characters numeric; replaced as double
+(1 missing value generated)
+(note: variable namefull was str68, now str73 to accommodate using data's values)
+(note: variable brnum was str5, now str6 to accommodate using data's values)
+(note: variable stalpbr was str2, now str21 to accommodate using data's values)
+(note: variable bkclass was str2, now str4 to accommodate using data's values)
+(note: variable brsertyp was str2, now str4 to accommodate using data's values)
+file C:\Users\USER\AppData\Local\Temp\ST_1910_000002.tmp saved
+    -> OK (running total: 2746869 obs)
+
+. 
+. di "Files processed: `n_files'"
+Files processed: 31
+
+. di "Total observations: " _N
+Total observations: 2746869
+
+. tab year
+
+       YEAR |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1994 |     81,297        2.96        2.96
+       1995 |     80,999        2.95        5.91
+       1996 |     81,375        2.96        8.87
+       1997 |     82,109        2.99       11.86
+       1998 |     83,314        3.03       14.89
+       1999 |     84,311        3.07       17.96
+       2000 |     85,489        3.11       21.07
+       2001 |     86,065        3.13       24.21
+       2002 |     86,576        3.15       27.36
+       2003 |     87,785        3.20       30.56
+       2004 |     89,785        3.27       33.82
+       2005 |     92,043        3.35       37.17
+       2006 |     94,752        3.45       40.62
+       2007 |     97,273        3.54       44.17
+       2008 |     99,162        3.61       47.78
+       2009 |     99,550        3.62       51.40
+       2010 |     98,520        3.59       54.99
+       2011 |     98,194        3.57       58.56
+       2012 |     97,341        3.54       62.10
+       2013 |     96,340        3.51       65.61
+       2014 |     94,725        3.45       69.06
+       2015 |     93,272        3.40       72.46
+       2016 |     91,834        3.34       75.80
+       2017 |     89,849        3.27       79.07
+       2018 |     88,075        3.21       82.28
+       2019 |     86,392        3.15       85.42
+       2020 |     84,982        3.09       88.52
+       2021 |     81,791        2.98       91.49
+       2022 |     79,172        2.88       94.38
+       2023 |     77,770        2.83       97.21
+       2024 |     76,727        2.79      100.00
+------------+-----------------------------------
+      Total |  2,746,869      100.00
+
+. 
+. label variable year      "FDIC SOD survey year (as of June 30)"
+
+. label variable cert      "FDIC Certificate number (institution merge key)"
+
+. label variable uninumbr  "Unique branch number (UNINUMBR)"
+
+. label variable rssdid    "Federal Reserve bank number (RSSDID)"
+
+. label variable stcntybr  "5-digit state+county FIPS - branch location"
+
+. label variable cntynamb  "County name - branch location"
+
+. label variable stalpbr   "State abbreviation - branch location"
+
+. capture label variable depsumbr "Branch deposits as of June 30 (thousands USD)"
+
+. label variable bkclass   "Institution charter class (FDIC)"
+
+. capture label variable namefull "Institution full name"
+
+. capture label variable brnum    "Branch office number"
+
+. 
+. destring brsertyp, replace force
+brsertyp: all characters numeric; replaced as byte
+(1 missing value generated)
+
+. gen fullservice = (brsertyp == 11 | brsertyp == 12)
+
+. label variable fullservice "=1 if full-service branch (BRSERTYP 11 or 12)"
+
+. 
+. gen commercial_bank = inlist(bkclass, "N", "NM", "SM")
+
+. gen savings_bank    = inlist(bkclass, "SB", "SI", "SL")
+
+. gen foreign_branch  = (bkclass == "OI")
+
+. 
+. label variable commercial_bank "=1 if commercial bank (BKCLASS N, NM, SM)"
+
+. label variable savings_bank    "=1 if savings institution (SB/SI/SL)"
+
+. label variable foreign_branch  "=1 if insured foreign branch (OI)"
+
+. 
+. gen community_bank = 0
+
+. gen regional_bank  = 0
+
+. gen megabank       = 0
+
+. 
+. save "$output\SOD_AllYears_Stacked.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\SOD_AllYears_Stacked.dta saved
+
+. di "Section 1 complete: " _N " branch-year rows saved."
+Section 1 complete: 2746869 branch-year rows saved.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 1B: BANK TYPE CLASSIFICATION
+>    Uses FDIC_Assets_New.csv - nominal assets, no deflation.
+>    Merge key: cert + year
+> ====================================================================*/
+. 
+. import delimited "$input\FDIC_Assets_New.csv", varnames(1) clear
+(4 vars, 260,665 obs)
+
+. destring cert year asset community_bank, replace force
+cert already numeric; no replace
+year already numeric; no replace
+asset already numeric; no replace
+community_bank already numeric; no replace
+
+. label variable cert           "FDIC Certificate number"
+
+. label variable year           "Report year (December 31)"
+
+. label variable asset          "Total assets, nominal thousands USD"
+
+. label variable community_bank "=1 if asset <= $10B nominal"
+
+. rename community_bank asset_cb_flag
+
+. sort cert year
+
+. save "$output\FDIC_Assets_New.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\FDIC_Assets_New.dta saved
+
+. di "FDIC assets: " _N " institution-year rows"
+FDIC assets: 260665 institution-year rows
+
+. 
+. use "$output\SOD_AllYears_Stacked.dta", clear
+
+. 
+. merge m:1 cert year using "$output\FDIC_Assets_New.dta", ///
+>     keepusing(asset asset_cb_flag)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                        88,250
+        from master                    70,898  (_merge==1)
+        from using                     17,352  (_merge==2)
+
+    matched                         2,675,971  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(17,352 observations deleted)
+
+. drop _merge
+
+. 
+. replace asset         = .  if asset         == .
+(0 real changes made)
+
+. replace asset_cb_flag = 0  if asset_cb_flag == .
+(70,898 real changes made)
+
+. 
+. drop community_bank regional_bank megabank
+
+. 
+. gen community_bank = (asset_cb_flag == 1 & commercial_bank == 1)
+
+. gen regional_bank  = (commercial_bank == 1 & asset >  10000000 ///
+>                       & asset <= 100000000 & asset != .)
+
+. gen megabank       = (commercial_bank == 1 & asset > 100000000 & asset != .)
+
+. 
+. label variable asset          "Total assets, nominal thousands USD"
+
+. label variable community_bank "=1 if community bank: comm. bank assets <=$10B nominal"
+
+. label variable regional_bank  "=1 if regional bank: comm. bank assets $10B-$100B nomina
+> l"
+
+. label variable megabank       "=1 if megabank: comm. bank assets >$100B nominal"
+
+. 
+. gen banktype = ""
+(2,746,869 missing values generated)
+
+. replace banktype = "1_Community" if community_bank == 1
+variable banktype was str1 now str11
+(1,178,678 real changes made)
+
+. replace banktype = "2_Regional"  if regional_bank  == 1
+(449,434 real changes made)
+
+. replace banktype = "3_Megabank"  if megabank        == 1
+(729,390 real changes made)
+
+. replace banktype = "4_Savings"   if savings_bank    == 1
+(156,999 real changes made)
+
+. replace banktype = "5_Foreign"   if foreign_branch  == 1
+(495 real changes made)
+
+. replace banktype = "6_Other"     if banktype        == ""
+(231,873 real changes made)
+
+. label variable banktype "Bank type (5 categories)"
+
+. 
+. di "===== BANK TYPE CLASSIFICATION CHECK ====="
+===== BANK TYPE CLASSIFICATION CHECK =====
+
+. tab banktype if inlist(year, 1994, 2009, 2024)
+
+  Bank type |
+         (5 |
+categories) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+1_Community |    118,766       46.11       46.11
+ 2_Regional |     35,617       13.83       59.94
+ 3_Megabank |     64,317       24.97       84.91
+  4_Savings |     12,203        4.74       89.65
+  5_Foreign |         72        0.03       89.67
+    6_Other |     26,599       10.33      100.00
+------------+-----------------------------------
+      Total |    257,574      100.00
+
+. 
+. save "$output\SOD_AllYears_Stacked.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\SOD_AllYears_Stacked.dta saved
+
+. di "Section 1B complete."
+Section 1B complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 2: FIGURE 1A - ALL BANK TYPES TREND (1994-2024)
+>    Legend placed below chart. Full bank type names used.
+> ====================================================================*/
+. 
+. use "$output\SOD_AllYears_Stacked.dta", clear
+
+. 
+. preserve
+
+. 
+.     collapse                                  ///
+>         (count) total_br    = uninumbr         ///
+>         (sum)   community_br = community_bank  ///
+>         (sum)   regional_br  = regional_bank   ///
+>         (sum)   mega_br      = megabank         ///
+>         (sum)   savings_br   = savings_bank     ///
+>         , by(year)
+
+. 
+.     sort year
+
+. 
+.     label variable total_br     "All FDIC-insured branches"
+
+.     label variable community_br "Community Banks (assets <=$10B)"
+
+.     label variable regional_br  "Regional Banks ($10B-$100B)"
+
+.     label variable mega_br      "Mega Banks (>$100B)"
+
+.     label variable savings_br   "Savings Banks"
+
+. 
+.     save "$output\YearLevel_Summary.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\YearLevel_Summary.dta saved
+
+. 
+.     * Figure 1A: All bank types
+.     * ylabel stops at 100,000 so lines are readable
+.     * Legend below chart (position 6), horizontal row (cols 5)
+.     twoway                                                              ///
+>         (line total_br     year,                                        ///
+>             lcolor(navy)         lwidth(medthick) lpattern(solid))     ///
+>         (line community_br year,                                        ///
+>             lcolor(cranberry)    lwidth(medthick) lpattern(solid))     ///
+>         (line regional_br  year,                                        ///
+>             lcolor(forest_green) lwidth(medthick) lpattern(solid))     ///
+>         (line mega_br      year,                                        ///
+>             lcolor(orange)       lwidth(medthick) lpattern(solid))     ///
+>         (line savings_br   year,                                        ///
+>             lcolor(purple)       lwidth(medthick) lpattern(solid)),    ///
+>         title("U.S. Bank Branches by Institution Type, 1994-2024",     ///
+>               size(medium))                                              ///
+>         xtitle("")                                                       ///
+>         ytitle("Number of Branches", size(small))                       ///
+>         xlabel(1994(5)2024, angle(0) labsize(vsmall))                  ///
+>         ylabel(0(20000)100000, angle(0) labsize(vsmall)                 ///
+>                format(%9.0fc))                                          ///
+>         legend(order(1 "All Branches"                                   ///
+>                      2 "Community Banks (<=$10B)"                       ///
+>                      3 "Regional Banks ($10B-$100B)"                    ///
+>                      4 "Mega Banks (>$100B)"                            ///
+>                      5 "Savings Banks")                                 ///
+>                position(6) ring(1) cols(3) size(vsmall)                ///
+>                region(lwidth(none) color(none)))                        ///
+>         graphregion(color(white)) plotregion(color(white))              ///
+>         xsize(10) ysize(7)
+
+. 
+.     graph export "$output\Figure1a_AllTypes_Trend.png", replace width(3200)
+(file C:\Users\USER\Downloads\Poster_Output\Figure1a_AllTypes_Trend.png written in PNG fo
+> rmat)
+
+.     di "Figure 1A saved."
+Figure 1A saved.
+
+. 
+.     * Figure 1B: Community banks only
+.     * Y-axis 25,000-45,000 shows the 28% decline clearly
+.     twoway                                                              ///
+>         (line community_br year,                                        ///
+>             lcolor(cranberry) lwidth(thick) lpattern(solid)),           ///
+>         title("Community Bank Branches, 1994-2024",                     ///
+>               size(medium))                                              ///
+>         xtitle("")                                                       ///
+>         ytitle("Number of Branches", size(small))                       ///
+>         xlabel(1994(5)2024, angle(0) labsize(vsmall))                  ///
+>         ylabel(25000(5000)45000, angle(0) labsize(vsmall)              ///
+>                format(%9.0fc))                                          ///
+>         legend(order(1 "Community Banks (<=$10B)")                      ///
+>                position(6) ring(1) size(small)                          ///
+>                region(lwidth(none) color(none)))                        ///
+>         graphregion(color(white)) plotregion(color(white))              ///
+>         xsize(10) ysize(7)
+
+. 
+.     graph export "$output\Figure1b_Community_Trend.png", replace width(3200)
+(file C:\Users\USER\Downloads\Poster_Output\Figure1b_Community_Trend.png written in PNG f
+> ormat)
+
+.     di "Figure 1B saved."
+Figure 1B saved.
+
+. 
+. restore
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 2B: BAR CHART - BRANCH DISTRIBUTION BY BANK TYPE
+>    1994 vs 2024. Foreign and Other excluded.
+> ====================================================================*/
+. 
+. use "$output\SOD_AllYears_Stacked.dta", clear
+
+. 
+. preserve
+
+.     keep if year == 1994 | year == 2024
+(2,588,845 observations deleted)
+
+.     drop if banktype == "5_Foreign" | banktype == "6_Other"
+(15,182 observations deleted)
+
+. 
+.     gen n = 1
+
+.     collapse (count) n, by(banktype year)
+
+.     rename n num_branches
+
+. 
+.     gen label = ""
+(8 missing values generated)
+
+.     replace label = "Community Banks"  if banktype == "1_Community"
+variable label was str1 now str15
+(2 real changes made)
+
+.     replace label = "Regional Banks"   if banktype == "2_Regional"
+(2 real changes made)
+
+.     replace label = "Mega Banks"       if banktype == "3_Megabank"
+(2 real changes made)
+
+.     replace label = "Savings Banks"    if banktype == "4_Savings"
+(2 real changes made)
+
+.     drop if label == ""
+(0 observations deleted)
+
+. 
+.     label define yrlab 1994 "1994" 2024 "2024"
+
+.     label values year yrlab
+
+. 
+.     graph bar num_branches,                                             ///
+>         over(year)                                                      ///
+>         over(label, sort(1) descending                                  ///
+>              label(labsize(vsmall) angle(0)))                           ///
+>         bar(1, color(navy))                                             ///
+>         bar(2, color(cranberry))                                        ///
+>         title("Bank Branches by Type: 1994 vs 2024",                   ///
+>               size(medium))                                              ///
+>         ytitle("Number of Branches", size(small))                       ///
+>         ylabel(, format(%9.0fc) labsize(vsmall))                       ///
+>         legend(order(1 "1994" 2 "2024")                                 ///
+>                position(6) ring(1) cols(2) size(small)                  ///
+>                region(lwidth(none) color(none)))                        ///
+>         graphregion(color(white)) plotregion(color(white))              ///
+>         xsize(10) ysize(7)
+
+. 
+.     graph export "$output\Figure2_BankType_Compare.png", replace width(3200)
+(file C:\Users\USER\Downloads\Poster_Output\Figure2_BankType_Compare.png written in PNG f
+> ormat)
+
+.     di "Figure 2 saved."
+Figure 2 saved.
+
+. restore
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 3: COUNTY-LEVEL DATASETS
+> ====================================================================*/
+. 
+. use "$output\SOD_AllYears_Stacked.dta", clear
+
+. 
+. * 1994 county snapshot
+. preserve
+
+.     keep if year == 1994
+(2,665,572 observations deleted)
+
+.     collapse                                     ///
+>         (count) num_branches   = uninumbr         ///
+>         (sum)   community_br   = community_bank   ///
+>         (sum)   regional_br    = regional_bank    ///
+>         (sum)   megabank_br    = megabank         ///
+>         (sum)   savings_br     = savings_bank     ///
+>         (sum)   deposits_total = depsumbr         ///
+>         , by(stcntybr cntynamb stalpbr)
+
+.     rename stcntybr fips_county
+
+.     rename cntynamb county_name
+
+.     rename stalpbr  state
+
+.     tostring fips_county, gen(fips_str) format("%05.0f")
+fips_str generated as str5
+
+.     destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+.     drop if fips_num > 56999
+(95 observations deleted)
+
+.     drop fips_num
+
+.     save "$output\County_1994.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_1994.dta saved
+
+.     di "County_1994.dta: " _N " counties"
+County_1994.dta: 3114 counties
+
+. restore
+
+. 
+. * 2024 county snapshot
+. preserve
+
+.     keep if year == 2024
+(2,670,142 observations deleted)
+
+.     collapse                                     ///
+>         (count) num_branches   = uninumbr         ///
+>         (sum)   community_br   = community_bank   ///
+>         (sum)   regional_br    = regional_bank    ///
+>         (sum)   megabank_br    = megabank         ///
+>         (sum)   savings_br     = savings_bank     ///
+>         (sum)   deposits_total = depsumbr         ///
+>         , by(stcntybr cntynamb stalpbr)
+
+.     rename stcntybr fips_county
+
+.     rename cntynamb county_name
+
+.     rename stalpbr  state
+
+.     tostring fips_county, gen(fips_str) format("%05.0f")
+fips_str generated as str5
+
+.     destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+.     drop if fips_num > 56999
+(89 observations deleted)
+
+.     drop fips_num
+
+.     gen community_share = community_br / num_branches
+
+.     gen deposits_mil    = deposits_total / 1000
+
+.     save "$output\County_Latest.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_Latest.dta saved
+
+.     di "County_Latest.dta: " _N " counties"
+County_Latest.dta: 3106 counties
+
+. restore
+
+. 
+. * Full county panel
+. preserve
+
+.     collapse                                     ///
+>         (count) num_branches   = uninumbr         ///
+>         (sum)   community_br   = community_bank   ///
+>         (sum)   regional_br    = regional_bank    ///
+>         (sum)   megabank_br    = megabank         ///
+>         (sum)   savings_br     = savings_bank     ///
+>         (sum)   deposits_total = depsumbr         ///
+>         , by(stcntybr cntynamb stalpbr year)
+
+.     rename stcntybr fips_county
+
+.     rename cntynamb county_name
+
+.     rename stalpbr  state
+
+.     gen deposits_mil = deposits_total / 1000
+
+.     sort fips_county year
+
+.     save "$output\County_Panel.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_Panel.dta saved
+
+.     di "County_Panel.dta: " _N " county-year observations"
+County_Panel.dta: 99363 county-year observations
+
+. restore
+
+. 
+. di "Section 3 complete."
+Section 3 complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 3B: BANKING DESERT IDENTIFICATION
+> ====================================================================*/
+. 
+. use "$output\County_1994.dta", clear
+
+. rename num_branches  branches_1994
+
+. rename community_br  community_1994
+
+. rename regional_br   regional_1994
+
+. rename megabank_br   megabank_1994
+
+. rename savings_br    savings_1994
+
+. keep fips_county county_name state branches_1994 ///
+>      community_1994 regional_1994 megabank_1994 savings_1994
+
+. 
+. merge 1:1 fips_county using "$output\County_Latest.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            52
+        from master                        30  (_merge==1)
+        from using                         22  (_merge==2)
+
+    matched                             3,084  (_merge==3)
+    -----------------------------------------
+
+. rename num_branches branches_latest
+
+. 
+. gen branches_latest_fill = branches_latest
+(30 missing values generated)
+
+. replace branches_latest_fill = 0 if _merge == 1
+(30 real changes made)
+
+. drop _merge
+
+. 
+. gen branch_change = branches_latest_fill - branches_1994
+(22 missing values generated)
+
+. gen pct_change    = (branch_change / branches_1994) * 100 ///
+>     if branches_1994 > 0 & branches_1994 != .
+(25 missing values generated)
+
+. 
+. gen desert  = (branches_1994 > 0 & branches_latest_fill == 0 & branches_1994 != .)
+
+. gen ct_flag = (state == "CT")
+
+. 
+. label variable branch_change "Branch change (2024 minus 1994)"
+
+. label variable pct_change    "Percent change in branches"
+
+. label variable desert        "=1 if banking desert (had branches 1994, zero 2024)"
+
+. label variable ct_flag       "=1 if CT reorganization artifact"
+
+. 
+. save "$output\County_Comparison.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_Comparison.dta saved
+
+. 
+. di "===== BANKING DESERT SUMMARY ====="
+===== BANKING DESERT SUMMARY =====
+
+. count if desert == 1 & ct_flag == 0
+  20
+
+. di "True banking deserts (excl CT): " r(N)
+True banking deserts (excl CT): 20
+
+. count if desert == 1 & ct_flag == 1
+  8
+
+. di "CT reorganization artifact: " r(N)
+CT reorganization artifact: 8
+
+. count if branch_change < 0 & desert == 0 & ct_flag == 0
+  1,313
+
+. di "Partial decline counties: " r(N)
+Partial decline counties: 1313
+
+. count if branch_change > 0
+  1,251
+
+. di "Counties with branch gains: " r(N)
+Counties with branch gains: 1251
+
+. 
+. preserve
+
+.     keep if desert == 1
+(3,108 observations deleted)
+
+.     gsort ct_flag state county_name
+
+.     export delimited "$output\Table_BankingDeserts.csv", replace
+file C:\Users\USER\Downloads\Poster_Output\Table_BankingDeserts.csv saved
+
+. restore
+
+. 
+. preserve
+
+.     keep if desert == 1 & ct_flag == 0
+(3,116 observations deleted)
+
+.     gen n = 1
+
+.     collapse (count) n (sum) branches_lost = branches_1994, by(state)
+
+.     rename n desert_counties
+
+.     gsort -desert_counties
+
+.     export delimited "$output\Table_DesertsByState.csv", replace
+file C:\Users\USER\Downloads\Poster_Output\Table_DesertsByState.csv saved
+
+. restore
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 3D: BANKING DESERT PROFILE - EDUCATION AND BROADBAND
+>    Compares true banking desert counties against all other counties
+>    on education (pct_bachelors) and broadband (broadband_rate).
+>    Uses ACS data from County_Panel_Merged.dta (most recent year per county).
+>    
+>    Key question: Do deserted counties have lower education and broadband
+>    than the rest of the country? If yes, this supports the argument that
+>    digital substitution is NOT available to these communities.
+> ====================================================================*/
+. 
+. * Get most recent ACS values per county from the merged panel
+. * (same approach used for maps in Section 7)
+. use "$output\County_Panel_Merged.dta", clear
+
+. bysort fips_county (year): keep if _n == _N
+(73,347 observations deleted)
+
+. keep fips_county pct_bachelors broadband_rate popestimate pcpincome
+
+. duplicates drop fips_county, force
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+
+. save "$output\County_ACS_Latest.dta", replace
+(note: file C:\Users\USER\Downloads\Poster_Output\County_ACS_Latest.dta not found)
+file C:\Users\USER\Downloads\Poster_Output\County_ACS_Latest.dta saved
+
+. di "County_ACS_Latest.dta: " _N " counties with ACS data"
+County_ACS_Latest.dta: 3081 counties with ACS data
+
+. 
+. * Merge ACS data into county comparison dataset
+. use "$output\County_Comparison.dta", clear
+
+. 
+. * Convert fips_county to numeric for merge (it may be string in comparison file)
+. capture confirm string variable fips_county
+
+. if !_rc destring fips_county, replace force
+
+. 
+. merge 1:1 fips_county using "$output\County_ACS_Latest.dta"
+(note: variable fips_county was long, now double to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            63
+        from master                        59  (_merge==1)
+        from using                          4  (_merge==2)
+
+    matched                             3,077  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(4 observations deleted)
+
+. drop _merge
+
+. 
+. * Define groups for comparison
+. * Group 1: True banking deserts (had branches 1994, zero 2024, excl CT)
+. * Group 2: All other counties (non-desert, non-CT)
+. gen desert_true = (desert == 1 & ct_flag == 0)
+
+. gen other       = (desert == 0 & ct_flag == 0)
+
+. 
+. *  Summary statistics by group 
+. di ""
+
+
+. di "===== BANKING DESERT vs ALL OTHER COUNTIES ====="
+===== BANKING DESERT vs ALL OTHER COUNTIES =====
+
+. di "True banking deserts (n=" 
+True banking deserts (n=
+
+. count if desert_true == 1
+  20
+
+. di r(N) ")"
+20)
+
+. di ""
+
+
+. 
+. di "--- Education (% adults 25+ with bachelor degree) ---"
+--- Education (% adults 25+ with bachelor degree) ---
+
+. di "  Desert counties:"
+  Desert counties:
+
+. quietly summarize pct_bachelors if desert_true == 1
+
+. di "    Mean: " %5.1f r(mean) "% | SD: " %5.1f r(sd) " | N=" r(N)
+    Mean:  18.1% | SD:   9.3 | N=15
+
+. di "  All other counties:"
+  All other counties:
+
+. quietly summarize pct_bachelors if other == 1
+
+. di "    Mean: " %5.1f r(mean) "% | SD: " %5.1f r(sd) " | N=" r(N)
+    Mean:  24.6% | SD:  10.1 | N=3045
+
+. 
+. di ""
+
+
+. di "--- Broadband (fraction of HH with broadband) ---"
+--- Broadband (fraction of HH with broadband) ---
+
+. di "  Desert counties:"
+  Desert counties:
+
+. quietly summarize broadband_rate if desert_true == 1
+
+. di "    Mean: " %5.3f r(mean) " (" %5.1f r(mean)*100 "%) | N=" r(N)
+    Mean: 0.718 ( 71.8%) | N=15
+
+. di "  All other counties:"
+  All other counties:
+
+. quietly summarize broadband_rate if other == 1
+
+. di "    Mean: " %5.3f r(mean) " (" %5.1f r(mean)*100 "%) | N=" r(N)
+    Mean: 0.862 ( 86.2%) | N=3045
+
+. 
+. di ""
+
+
+. di "--- Per capita income (USD) ---"
+--- Per capita income (USD) ---
+
+. di "  Desert counties:"
+  Desert counties:
+
+. quietly summarize pcpincome if desert_true == 1
+
+. di "    Mean: $" %8.0fc r(mean) " | N=" r(N)
+    Mean: $  41,811 | N=15
+
+. di "  All other counties:"
+  All other counties:
+
+. quietly summarize pcpincome if other == 1
+
+. di "    Mean: $" %8.0fc r(mean) " | N=" r(N)
+    Mean: $  59,944 | N=3045
+
+. 
+. di ""
+
+
+. di "--- Population ---"
+--- Population ---
+
+. di "  Desert counties:"
+  Desert counties:
+
+. quietly summarize popestimate if desert_true == 1
+
+. di "    Mean: " %8.0fc r(mean) " | N=" r(N)
+    Mean:    4,886 | N=15
+
+. di "  All other counties:"
+  All other counties:
+
+. quietly summarize popestimate if other == 1
+
+. di "    Mean: " %8.0fc r(mean) " | N=" r(N)
+    Mean:  109,207 | N=3045
+
+. 
+. *  Export comparison table to Excel 
+. * Build a county-level table for the Excel workbook
+. preserve
+
+.     keep if desert_true == 1 | other == 1
+(17 observations deleted)
+
+. 
+.     * Create group label
+.     gen Group = "True Banking Desert" if desert_true == 1
+(3,099 missing values generated)
+
+.     replace Group = "All Other Counties" if other == 1
+(3,099 real changes made)
+
+. 
+.     * Collapse to group means
+.     collapse (mean) pct_bachelors broadband_rate pcpincome popestimate ///
+>              (count) n_counties = fips_county, by(Group)
+
+. 
+.     * Format broadband as percent
+.     gen broadband_pct = broadband_rate * 100
+
+.     drop broadband_rate
+
+. 
+.     * Round for readability
+.     format pct_bachelors  %5.1f
+
+.     format broadband_pct  %5.1f
+
+.     format pcpincome      %8.0fc
+
+.     format popestimate    %10.0fc
+
+. 
+.     label variable Group          "County Group"
+
+.     label variable n_counties     "Number of Counties"
+
+.     label variable pct_bachelors  "% Adults 25+ Bachelor Degree (ACS)"
+
+.     label variable broadband_pct  "% HH with Broadband (ACS)"
+
+.     label variable pcpincome      "Per Capita Income (USD)"
+
+.     label variable popestimate    "Mean Population"
+
+. 
+.     export excel Group n_counties pct_bachelors broadband_pct pcpincome popestimate ///
+>         using "$output\Analysis_Tables.xlsx",                                        //
+> /
+>         sheet("Desert_vs_Others") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+.     di "Desert vs Others comparison exported to Excel"
+Desert vs Others comparison exported to Excel
+
+. restore
+
+. 
+. *  County-level detail table for all desert counties 
+. preserve
+
+.     keep if desert_true == 1
+(3,116 observations deleted)
+
+.     keep county_name state branches_1994 pct_bachelors broadband_rate pcpincome popesti
+> mate
+
+. 
+.     gen broadband_pct = broadband_rate * 100
+(5 missing values generated)
+
+.     drop broadband_rate
+
+. 
+.     format pct_bachelors %5.1f
+
+.     format broadband_pct %5.1f
+
+.     format pcpincome     %8.0fc
+
+.     format popestimate   %10.0fc
+
+. 
+.     rename county_name   County
+
+.     rename state         State
+
+.     rename branches_1994 Branches_1994
+
+.     rename pct_bachelors Pct_Bachelors
+
+.     rename broadband_pct Broadband_Pct
+
+.     rename pcpincome     PerCapita_Income
+
+.     rename popestimate   Population
+
+. 
+.     gsort State County
+
+. 
+.     export excel County State Branches_1994 Pct_Bachelors Broadband_Pct ///
+>         PerCapita_Income Population                                       ///
+>         using "$output\Analysis_Tables.xlsx",                             ///
+>         sheet("Desert_County_Detail") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+.     di "Desert county detail exported to Excel"
+Desert county detail exported to Excel
+
+. restore
+
+. 
+. *  Two-sample t-test: are differences statistically significant? 
+. di ""
+
+
+. di "===== T-TESTS: DESERT vs OTHER COUNTIES ====="
+===== T-TESTS: DESERT vs OTHER COUNTIES =====
+
+. di ""
+
+
+. di "Education:"
+Education:
+
+. ttest pct_bachelors, by(desert_true)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |   3,062    24.63083    .1830047    10.12663      24.272    24.98965
+       1 |      15       18.12    2.400063    9.295406    12.97238    23.26762
+---------+--------------------------------------------------------------------
+combined |   3,077    24.59909    .1826461    10.13151    24.24097    24.95721
+---------+--------------------------------------------------------------------
+    diff |             6.51083    2.620141                1.373424    11.64823
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =   2.4849
+Ho: diff = 0                                     degrees of freedom =     3075
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9935         Pr(|T| > |t|) = 0.0130          Pr(T > t) = 0.0065
+
+. di ""
+
+
+. di "Broadband:"
+Broadband:
+
+. ttest broadband_rate, by(desert_true)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |   3,062    .8623741    .0010323    .0571244      .86035    .8643982
+       1 |      15    .7178796    .0305944    .1184914    .6522613     .783498
+---------+--------------------------------------------------------------------
+combined |   3,077    .8616697    .0010531    .0584166    .8596049    .8637346
+---------+--------------------------------------------------------------------
+    diff |            .1444945    .0148963                .1152868    .1737021
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =   9.7000
+Ho: diff = 0                                     degrees of freedom =     3075
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t) = 0.0000
+
+. di ""
+
+
+. di "Per capita income:"
+Per capita income:
+
+. ttest pcpincome, by(desert_true)
+
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. Err.   Std. Dev.   [95% Conf. Interval]
+---------+--------------------------------------------------------------------
+       0 |   3,062    60046.14    347.3543    19220.97    59365.07    60727.22
+       1 |      15       41811    3414.771    13225.35    34487.04    49134.96
+---------+--------------------------------------------------------------------
+combined |   3,077    59957.25    346.7917    19236.78    59277.28    60637.22
+---------+--------------------------------------------------------------------
+    diff |            18235.14    4969.007                8492.236    27978.05
+------------------------------------------------------------------------------
+    diff = mean(0) - mean(1)                                      t =   3.6698
+Ho: diff = 0                                     degrees of freedom =     3075
+
+    Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = 0.9999         Pr(|T| > |t|) = 0.0002          Pr(T > t) = 0.0001
+
+. 
+. di "Section 3D complete."
+Section 3D complete.
+
+. 
+. /*====================================================================*
+>    SECTION 3C: REGIONAL COMMUNITY BANK SHARE
+>    South split into 3 inlist calls (max 10 per call)
+> ====================================================================*/
+. 
+. use "$output\SOD_AllYears_Stacked.dta", clear
+
+. 
+. * Clean state abbreviation - trim to 2 characters
+. gen stalpbr2 = substr(strtrim(stalpbr), 1, 2)
+
+. 
+. gen region = ""
+(2,746,869 missing values generated)
+
+. replace region = "Northeast" if inlist(stalpbr2, ///
+>     "CT","ME","MA","NH","RI","VT","NJ","NY","PA")
+variable region was str1 now str9
+(525,215 real changes made)
+
+. replace region = "Midwest" if inlist(stalpbr2, ///
+>     "IL","IN","MI","OH","WI","IA","KS","MN")
+(612,578 real changes made)
+
+. replace region = "Midwest" if inlist(stalpbr2, ///
+>     "MO","NE","ND","SD")
+(126,831 real changes made)
+
+. replace region = "South" if inlist(stalpbr2, ///
+>     "DE","FL","GA","MD","NC","SC")
+(401,612 real changes made)
+
+. replace region = "South" if inlist(stalpbr2, ///
+>     "VA","DC","WV","AL")
+(145,601 real changes made)
+
+. replace region = "South" if inlist(stalpbr2, ///
+>     "KY","MS","TN","AR","LA","OK","TX")
+(458,698 real changes made)
+
+. replace region = "West" if inlist(stalpbr2, ///
+>     "AZ","CO","ID","MT","NV","NM","UT","WY")
+(156,421 real changes made)
+
+. replace region = "West" if inlist(stalpbr2, ///
+>     "AK","CA","HI","OR","WA")
+(304,003 real changes made)
+
+. drop if region == ""
+(15,910 observations deleted)
+
+. 
+. preserve
+
+.     keep if year == 1994 | year == 2024
+(2,573,761 observations deleted)
+
+. 
+.     collapse                               ///
+>         (count) total_br     = uninumbr    ///
+>         (sum)   community_br = community_bank ///
+>         , by(region year)
+
+. 
+.     gen community_pct = community_br / total_br * 100
+
+. 
+.     graph bar community_pct,                                            ///
+>         over(year)                                                      ///
+>         over(region)                                                    ///
+>         bar(1, color(navy))                                             ///
+>         bar(2, color(cranberry))                                        ///
+>         title("Community Bank Branch Share by Region",                  ///
+>               size(medium))                                              ///
+>         ytitle("Community Bank Share (%)", size(small))                 ///
+>         ylabel(0(10)80, labsize(vsmall))                                ///
+>         legend(order(1 "1994" 2 "2024")                                 ///
+>                position(6) ring(1) cols(2) size(small)                  ///
+>                region(lwidth(none) color(none)))                        ///
+>         graphregion(color(white)) plotregion(color(white))              ///
+>         xsize(8) ysize(7)
+
+. 
+.     graph export "$output\Figure3_RegionShare.png", replace width(3200)
+(file C:\Users\USER\Downloads\Poster_Output\Figure3_RegionShare.png written in PNG format
+> )
+
+.     di "Figure 3 saved."
+Figure 3 saved.
+
+. 
+.     export delimited "$output\Table_RegionSummary.csv", replace
+file C:\Users\USER\Downloads\Poster_Output\Table_RegionSummary.csv saved
+
+. restore
+
+. 
+. di "Section 3B-3C complete."
+Section 3B-3C complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 4: MAPS - COUNTY BRANCH DENSITY (1994 vs 2024)
+>    Comment out shp2dta after first successful run.
+> ====================================================================*/
+. 
+. shp2dta using "$input\tl_2023_us_county",    ///
+>     data("$output\counties_data.dta")         ///
+>     coor("$output\counties_coor.dta")         ///
+>     replace genid(mapid)
+type: 5
+
+. di "Shapefile converted."
+Shapefile converted.
+
+. 
+. * Map A: 1994
+. use "$output\counties_data.dta", clear
+
+. rename GEOID fips_str
+
+. destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+. drop if fips_num >= 2000  & fips_num < 3000
+(30 observations deleted)
+
+. drop if fips_num >= 15000 & fips_num < 16000
+(5 observations deleted)
+
+. drop if fips_num > 56999
+(91 observations deleted)
+
+. drop fips_num
+
+. merge 1:1 fips_str using "$output\County_1994.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            65
+        from master                        30  (_merge==1)
+        from using                         35  (_merge==2)
+
+    matched                             3,079  (_merge==3)
+    -----------------------------------------
+
+. replace num_branches = 0 if num_branches == .
+(30 real changes made)
+
+. drop if _merge == 2
+(35 observations deleted)
+
+. drop _merge
+
+. spmap num_branches using "$output\counties_coor.dta", id(mapid)      ///
+>     fcolor(Blues) clnumber(6)                                          ///
+>     ocolor(white ..) osize(vvthin ..)                                  ///
+>     title("Bank Branches per County, 1994", size(large) color(navy))  ///
+>     legend(title("Branches", size(small)) size(small)                  ///
+>            position(4) ring(0) region(lwidth(none) color(none)))       ///
+>     graphregion(color(white) margin(zero)) plotregion(margin(zero))    ///
+>     xsize(10) ysize(7)
+
+. graph export "$output\Figure4a_Map_1994.png", replace width(3600)
+(file C:\Users\USER\Downloads\Poster_Output\Figure4a_Map_1994.png written in PNG format)
+
+. di "Map 1994 saved."
+Map 1994 saved.
+
+. 
+. * Map B: 2024
+. use "$output\counties_data.dta", clear
+
+. rename GEOID fips_str
+
+. destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+. drop if fips_num >= 2000  & fips_num < 3000
+(30 observations deleted)
+
+. drop if fips_num >= 15000 & fips_num < 16000
+(5 observations deleted)
+
+. drop if fips_num > 56999
+(91 observations deleted)
+
+. drop fips_num
+
+. merge 1:1 fips_str using "$output\County_Latest.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                            61
+        from master                        32  (_merge==1)
+        from using                         29  (_merge==2)
+
+    matched                             3,077  (_merge==3)
+    -----------------------------------------
+
+. replace num_branches = 0 if num_branches == .
+(32 real changes made)
+
+. drop if _merge == 2
+(29 observations deleted)
+
+. drop _merge
+
+. spmap num_branches using "$output\counties_coor.dta", id(mapid)      ///
+>     fcolor(Blues) clnumber(6)                                          ///
+>     ocolor(white ..) osize(vvthin ..)                                  ///
+>     title("Bank Branches per County, 2024", size(large) color(navy))  ///
+>     legend(title("Branches", size(small)) size(small)                  ///
+>            position(4) ring(0) region(lwidth(none) color(none)))       ///
+>     graphregion(color(white) margin(zero)) plotregion(margin(zero))    ///
+>     xsize(10) ysize(7)
+
+. graph export "$output\Figure4b_Map_2024.png", replace width(3600)
+(file C:\Users\USER\Downloads\Poster_Output\Figure4b_Map_2024.png written in PNG format)
+
+. di "Map 2024 saved."
+Map 2024 saved.
+
+. 
+. di "Section 4 complete."
+Section 4 complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 5: EXTERNAL DATASETS - CLEAN AND MERGE
+>    BEA income, Census population, ACS education + broadband.
+>    ACS files are single cross-sections (one row per county, no year).
+>    Each vintage is saved separately and assigned to panel years via
+>    a replace block - no fabricated rows, no expand.
+> 
+>    ACS Education variable by vintage:
+>      2010: S1501_C01_015E = Total % bachelor+ (C01 is percent in 2010)
+>      2015: S1501_C02_015E = Percent % bachelor+
+>      2020: S1501_C02_015E = Percent % bachelor+
+>      2023: S1501_C02_015E = Percent % bachelor+
+>    NOTE: In 2015/2020/2023, C01_015E is a COUNT not a percent.
+>          Only C02_015E gives the correct percentage value.
+> 
+>    Vintage assignment:
+>      Education 2010 -> panel years <= 2010
+>      Education 2015 -> panel years 2011-2015
+>      Education 2020 -> panel years 2016-2020
+>      Education 2023 -> panel years >= 2021
+>      Broadband 2017 -> panel years <= 2017
+>      Broadband 2020 -> panel years 2018-2020
+>      Broadband 2023 -> panel years >= 2021
+> ====================================================================*/
+. 
+. * 5A: BEA PER CAPITA INCOME
+. import delimited "$input\BEA_Income.csv", varnames(1) clear
+(64 vars, 9,631 obs)
+
+. keep if linecode == 3
+(6,422 observations deleted)
+
+. gen geofips2 = subinstr(geofips, char(34), "", .)
+
+. gen geofips3 = strtrim(geofips2)
+
+. destring geofips3, gen(fips_county) force
+geofips3: all characters numeric; fips_county generated as long
+
+. drop if fips_county == .
+(0 observations deleted)
+
+. drop if mod(fips_county, 1000) == 0
+(60 observations deleted)
+
+. * Wide: v34=1994, v35=1995, ..., v64=2024
+. keep fips_county v34-v64
+
+. forvalues y = 1994/2024 {
+  2.     local v = `y' - 1994 + 34
+  3.     capture rename v`v' inc`y'
+  4. }
+
+. * Verify column mapping worked
+. di "BEA income - checking year coverage:"
+BEA income - checking year coverage:
+
+. capture confirm variable inc1994
+
+. if _rc di "WARNING: inc1994 not found - check BEA column mapping"
+
+. else   di "inc1994 found - BEA columns mapped correctly"
+inc1994 found - BEA columns mapped correctly
+
+. reshape long inc, i(fips_county) j(year)
+(note: j = 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 200
+> 9 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     3149   ->   97619
+Number of variables                  32   ->       3
+j variable (31 values)                    ->   year
+xij variables:
+            inc1994 inc1995 ... inc2024   ->   inc
+-----------------------------------------------------------------------------
+
+. rename inc pcpincome
+
+. destring pcpincome, force replace
+pcpincome: contains nonnumeric characters; replaced as long
+(1147 missing values generated)
+
+. label variable pcpincome   "Per capita personal income (BEA CAINC1, USD)"
+
+. label variable fips_county "5-digit state+county FIPS"
+
+. sort fips_county year
+
+. save "$output\BEA_Clean.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\BEA_Clean.dta saved
+
+. di "BEA_Clean.dta: " _N " county-year rows"
+BEA_Clean.dta: 97619 county-year rows
+
+. 
+. 
+. * 5B: CENSUS POPULATION
+. * Coverage: 2000-2024. Years 1994-1999 will be missing (no Census data).
+. * This restricts the regression sample to 2001-2024 (after 1-year lag).
+. * Trend charts in Section 2 are unaffected (use SOD data only).
+. 
+. import delimited "$input\CO-EST2024-ALLDATA.csv", varnames(1) clear
+(83 vars, 3,195 obs)
+
+. keep state county popestimate2020 popestimate2021 popestimate2022 ///
+>      popestimate2023 popestimate2024
+
+. gen fips_county = state * 1000 + county
+
+. drop if county == 0
+(51 observations deleted)
+
+. reshape long popestimate, i(fips_county) j(year)
+(note: j = 2020 2021 2022 2023 2024)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     3144   ->   15720
+Number of variables                   8   ->       5
+j variable (5 values)                     ->   year
+xij variables:
+popestimate2020 popestimate2021 ... popestimate2024->popestimate
+-----------------------------------------------------------------------------
+
+. save "$output\Pop_2020s.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\Pop_2020s.dta saved
+
+. 
+. import delimited "$input\CO-EST2019-ALLDATA.csv", varnames(1) clear
+(164 vars, 3,193 obs)
+
+. keep state county popestimate2010 popestimate2011 popestimate2012 ///
+>      popestimate2013 popestimate2014 popestimate2015 popestimate2016 ///
+>      popestimate2017 popestimate2018 popestimate2019
+
+. gen fips_county = state * 1000 + county
+
+. drop if county == 0
+(51 observations deleted)
+
+. reshape long popestimate, i(fips_county) j(year)
+(note: j = 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     3142   ->   31420
+Number of variables                  13   ->       5
+j variable (10 values)                    ->   year
+xij variables:
+popestimate2010 popestimate2011 ... popestimate2019->popestimate
+-----------------------------------------------------------------------------
+
+. save "$output\Pop_2010s.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\Pop_2010s.dta saved
+
+. 
+. import delimited "$input\CO-EST2000INT-TOT.csv", varnames(1) clear
+(20 vars, 3,194 obs)
+
+. keep state county popestimate2000 popestimate2001 popestimate2002 ///
+>      popestimate2003 popestimate2004 popestimate2005 popestimate2006 ///
+>      popestimate2007 popestimate2008 popestimate2009
+
+. gen fips_county = state * 1000 + county
+
+. drop if county == 0
+(51 observations deleted)
+
+. reshape long popestimate, i(fips_county) j(year)
+(note: j = 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     3143   ->   31430
+Number of variables                  13   ->       5
+j variable (10 values)                    ->   year
+xij variables:
+popestimate2000 popestimate2001 ... popestimate2009->popestimate
+-----------------------------------------------------------------------------
+
+. save "$output\Pop_2000s.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\Pop_2000s.dta saved
+
+. 
+. use "$output\Pop_2020s.dta", clear
+
+. append using "$output\Pop_2010s.dta"
+
+. append using "$output\Pop_2000s.dta"
+
+. drop if popestimate == . | popestimate == 0
+(0 observations deleted)
+
+. drop state county
+
+. label variable popestimate "Annual county population estimate (Census)"
+
+. sort fips_county year
+
+. save "$output\Population_Panel.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\Population_Panel.dta saved
+
+. di "Population_Panel.dta: " _N " county-year rows (2000-2024)"
+Population_Panel.dta: 78570 county-year rows (2000-2024)
+
+. 
+. 
+. * 5C: ACS EDUCATION - one vintage per year 2010-2024
+. * Folder: C:\Users\USER\Downloads\ACS_Education\
+. * Filenames: ACSST5YYYY_S1501-Data.csv (downloaded from data.census.gov)
+. *
+. * Correct variable by vintage (verified from actual files):
+. *   2010-2014: S1501_C01_015E = Total percent bachelor degree+
+. *   2015-2024: S1501_C02_015E = Percent bachelor degree+ (C01=count in these years)
+. *
+. * BOM status: only 2024 file has BOM - strip_bom.py must be run on it.
+. *   All 2010-2023 files have no BOM.
+. *
+. * Panel year assignment:
+. *   Panel years < 2010  -> use 2010 vintage (earliest available)
+. *   Panel years 2010-2024 -> exact one-to-one match
+. 
+. global acs_edu "C:\Users\USER\Downloads\ACS_Education"
+
+. 
+. forvalues yr = 2010/2023 {
+  2. 
+.     import delimited "$acs_edu\ACSST5Y`yr'.S1501-Data.csv", varnames(1) clear
+  3.     drop in 1
+  4. 
+.     * FIPS - convert float to int to match panel fips_county type (long)
+.     gen fips_county_f = real(substr(geo_id, -5, 5))
+  5.     gen fips_county   = int(fips_county_f)
+  6.     drop fips_county_f
+  7.     drop if fips_county == .
+  8. 
+.     * Select correct percent variable by vintage
+.     * Destring source variable first (may contain "(X)" suppressed values)
+.     gen pct_bachelors_`yr' = .
+  9.     if `yr' <= 2014 {
+ 10.         capture confirm variable s1501_c01_015e
+ 11.         if !_rc {
+ 12.             capture destring s1501_c01_015e, replace force
+ 13.             capture replace pct_bachelors_`yr' = s1501_c01_015e
+ 14.         }
+ 15.     }
+ 16.     else {
+ 17.         capture confirm variable s1501_c02_015e
+ 18.         if !_rc {
+ 19.             capture destring s1501_c02_015e, replace force
+ 20.             capture replace pct_bachelors_`yr' = s1501_c02_015e
+ 21.         }
+ 22.     }
+ 23.     drop if pct_bachelors_`yr' == .
+ 24. 
+.     keep fips_county pct_bachelors_`yr'
+ 25.     duplicates drop fips_county, force
+ 26.     sort fips_county
+ 27.     save "$output\ACS_Educ_`yr'.dta", replace
+ 28.     di "ACS Education `yr': " _N " counties"
+ 29. }
+(231 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2010.dta saved
+ACS Education 2010: 3221 counties
+(231 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2011.dta saved
+ACS Education 2011: 3221 counties
+(231 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2012.dta saved
+ACS Education 2012: 3221 counties
+(231 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2013.dta saved
+ACS Education 2013: 3221 counties
+(231 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2014.dta saved
+ACS Education 2014: 3220 counties
+(771 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2015.dta saved
+ACS Education 2015: 3220 counties
+(771 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2016.dta saved
+ACS Education 2016: 3220 counties
+(771 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2017.dta saved
+ACS Education 2017: 3220 counties
+(771 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2018.dta saved
+ACS Education 2018: 3220 counties
+(771 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,220 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2019.dta saved
+ACS Education 2019: 3220 counties
+(771 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2020.dta saved
+ACS Education 2020: 3221 counties
+(771 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,221 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2021.dta saved
+ACS Education 2021: 3221 counties
+(771 vars, 3,223 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,222 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2022.dta saved
+ACS Education 2022: 3222 counties
+(771 vars, 3,223 obs)
+(1 observation deleted)
+(0 observations deleted)
+(3,222 missing values generated)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2023.dta saved
+ACS Education 2023: 3222 counties
+
+. 
+. * 2024 vintage has dot separator in filename: ACSST5Y2024.S1501-Data.csv
+. import delimited "$acs_edu\ACSST5Y2024.S1501-Data.csv", varnames(1) clear
+(771 vars, 3,223 obs)
+
+. drop in 1
+(1 observation deleted)
+
+. gen fips_county_f = real(substr(geo_id, -5, 5))
+
+. gen fips_county   = int(fips_county_f)
+
+. drop fips_county_f
+
+. drop if fips_county == .
+(0 observations deleted)
+
+. gen pct_bachelors_2024 = .
+(3,222 missing values generated)
+
+. capture confirm variable s1501_c02_015e
+
+. if !_rc {
+.     capture destring s1501_c02_015e, replace force
+.     capture replace pct_bachelors_2024 = s1501_c02_015e
+. }
+
+. drop if pct_bachelors_2024 == .
+(0 observations deleted)
+
+. keep fips_county pct_bachelors_2024
+
+. duplicates drop fips_county, force
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+
+. sort fips_county
+
+. save "$output\ACS_Educ_2024.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\ACS_Educ_2024.dta saved
+
+. di "ACS Education 2024: " _N " counties"
+ACS Education 2024: 3222 counties
+
+. 
+. 
+. * 5D: ACS BROADBAND - one vintage per year 2017-2024
+. * Folder: C:\Users\USER\Downloads\ACS_Broadband\
+. * Filenames: ACSDT5YYYY_B28002-Data.csv
+. * broadband_rate = B28002_004E / B28002_001E
+. *
+. * BOM status: only 2024 file has BOM - strip_bom.py must be run on it.
+. *   All 2017-2023 files have no BOM.
+. *
+. * Panel year assignment:
+. *   Panel years < 2017  -> use 2017 vintage (earliest available)
+. *   Panel years 2017-2024 -> exact one-to-one match
+. 
+. global acs_bb "C:\Users\USER\Downloads\ACS_Broadband"
+
+. 
+. forvalues yr = 2017/2023 {
+  2. 
+.     import delimited "$acs_bb\ACSDT5Y`yr'.B28002-Data.csv", varnames(1) clear
+  3.     drop in 1
+  4. 
+.     * FIPS - convert float to int to match panel fips_county type (long)
+.     gen fips_county_f = real(substr(geo_id, -5, 5))
+  5.     gen fips_county   = int(fips_county_f)
+  6.     drop fips_county_f
+  7.     drop if fips_county == .
+  8. 
+.     destring b28002_001e b28002_004e, replace force
+  9.     gen broadband_rate_`yr' = b28002_004e / b28002_001e
+ 10.     replace broadband_rate_`yr' = . if broadband_rate_`yr' < 0 | broadband_rate_`yr'
+>  > 1
+ 11. 
+.     keep fips_county broadband_rate_`yr'
+ 12.     drop if broadband_rate_`yr' == .
+ 13.     duplicates drop fips_county, force
+ 14.     sort fips_county
+ 15.     save "$output\ACS_BB_`yr'.dta", replace
+ 16.     di "ACS Broadband `yr': " _N " counties"
+ 17. }
+(29 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2017.dta saved
+ACS Broadband 2017: 3220 counties
+(29 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2018.dta saved
+ACS Broadband 2018: 3220 counties
+(29 vars, 3,221 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2019.dta saved
+ACS Broadband 2019: 3220 counties
+(29 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2020.dta saved
+ACS Broadband 2020: 3221 counties
+(29 vars, 3,222 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2021.dta saved
+ACS Broadband 2021: 3221 counties
+(29 vars, 3,223 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2022.dta saved
+ACS Broadband 2022: 3222 counties
+(29 vars, 3,223 obs)
+(1 observation deleted)
+(0 observations deleted)
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+(0 real changes made)
+(0 observations deleted)
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2023.dta saved
+ACS Broadband 2023: 3222 counties
+
+. 
+. * 2024 vintage has dot separator in filename: ACSDT5Y2024.B28002-Data.csv
+. import delimited "$acs_bb\ACSDT5Y2024.B28002-Data.csv", varnames(1) clear
+(29 vars, 3,223 obs)
+
+. drop in 1
+(1 observation deleted)
+
+. gen fips_county_f = real(substr(geo_id, -5, 5))
+
+. gen fips_county   = int(fips_county_f)
+
+. drop fips_county_f
+
+. drop if fips_county == .
+(0 observations deleted)
+
+. destring b28002_001e b28002_004e, replace force
+b28002_001e: all characters numeric; replaced as long
+b28002_004e: all characters numeric; replaced as long
+
+. gen broadband_rate_2024 = b28002_004e / b28002_001e
+
+. replace broadband_rate_2024 = . if broadband_rate_2024 < 0 | broadband_rate_2024 > 1
+(0 real changes made)
+
+. keep fips_county broadband_rate_2024
+
+. drop if broadband_rate_2024 == .
+(0 observations deleted)
+
+. duplicates drop fips_county, force
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+
+. sort fips_county
+
+. save "$output\ACS_BB_2024.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\ACS_BB_2024.dta saved
+
+. di "ACS Broadband 2024: " _N " counties"
+ACS Broadband 2024: 3222 counties
+
+. 
+. * 5E: MERGE ALL INTO COUNTY PANEL
+. * BEA + Population: panel merges on fips_county + year
+. * ACS: cross-section merges on fips_county only
+. * One-to-one vintage assignment after all merges.
+. 
+. use "$output\County_Panel.dta", clear
+
+. 
+. * BEA income
+. merge m:1 fips_county year using "$output\BEA_Clean.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                         7,208
+        from master                     4,473  (_merge==1)
+        from using                      2,735  (_merge==2)
+
+    matched                            94,890  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(2,735 observations deleted)
+
+. drop _merge
+
+. 
+. * Population
+. merge m:1 fips_county year using "$output\Population_Panel.dta"
+(note: variable fips_county was long, now double to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                        22,482
+        from master                    21,635  (_merge==1)
+        from using                        847  (_merge==2)
+
+    matched                            77,728  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(847 observations deleted)
+
+. drop _merge
+
+. 
+. * Education - merge all 15 vintages (2010-2024) as cross-sections
+. forvalues yr = 2010/2024 {
+  2.     merge m:1 fips_county using "$output\ACS_Educ_`yr'.dta"
+  3.     drop if _merge == 2
+  4.     drop _merge
+  5. }
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           579
+        from master                       561  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,802  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           579
+        from master                       561  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,802  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           579
+        from master                       561  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,802  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           579
+        from master                       561  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,802  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           623
+        from master                       605  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,758  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           623
+        from master                       605  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,758  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+. 
+. * Assign education one-to-one by panel year
+. * Years before 2010 get 2010 vintage (earliest available)
+. gen pct_bachelors = .
+(99,363 missing values generated)
+
+. replace pct_bachelors = pct_bachelors_2010 if year < 2010
+(51,032 real changes made)
+
+. forvalues yr = 2010/2024 {
+  2.     replace pct_bachelors = pct_bachelors_`yr' if year == `yr'
+  3. }
+(3,190 real changes made)
+(3,188 real changes made)
+(3,188 real changes made)
+(3,188 real changes made)
+(3,188 real changes made)
+(3,189 real changes made)
+(3,185 real changes made)
+(3,186 real changes made)
+(3,186 real changes made)
+(3,186 real changes made)
+(3,185 real changes made)
+(3,184 real changes made)
+(3,176 real changes made)
+(3,182 real changes made)
+(3,181 real changes made)
+
+. forvalues yr = 2010/2024 {
+  2.     drop pct_bachelors_`yr'
+  3. }
+
+. label variable pct_bachelors "% adults 25+ bachelor's+ (ACS S1501, one vintage per year
+> )"
+
+. 
+. * Broadband - merge all 8 vintages (2017-2024) as cross-sections
+. forvalues yr = 2017/2024 {
+  2.     merge m:1 fips_county using "$output\ACS_BB_`yr'.dta"
+  3.     drop if _merge == 2
+  4.     drop _merge
+  5. }
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           599
+        from master                       581  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,782  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           623
+        from master                       605  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,758  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           623
+        from master                       605  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,758  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           837
+        from master                       819  (_merge==1)
+        from using                         18  (_merge==2)
+
+    matched                            98,544  (_merge==3)
+    -----------------------------------------
+(18 observations deleted)
+
+. 
+. * Assign broadband one-to-one by panel year
+. * Years before 2017 get 2017 vintage (earliest available)
+. gen broadband_rate = .
+(99,363 missing values generated)
+
+. replace broadband_rate = broadband_rate_2017 if year < 2017
+(73,328 real changes made)
+
+. forvalues yr = 2017/2024 {
+  2.     replace broadband_rate = broadband_rate_`yr' if year == `yr'
+  3. }
+(3,186 real changes made)
+(3,186 real changes made)
+(3,186 real changes made)
+(3,185 real changes made)
+(3,184 real changes made)
+(3,176 real changes made)
+(3,182 real changes made)
+(3,181 real changes made)
+
+. forvalues yr = 2017/2024 {
+  2.     drop broadband_rate_`yr'
+  3. }
+
+. label variable broadband_rate "HH broadband rate (ACS B28002, one vintage per year)"
+
+. 
+. * Derived variables
+. gen branches_pc  = (num_branches / popestimate) * 10000
+(21,635 missing values generated)
+
+. gen community_pc = (community_br / popestimate) * 10000
+(21,635 missing values generated)
+
+. gen log_pop      = log(popestimate)
+(21,635 missing values generated)
+
+. gen log_income   = log(pcpincome)
+(4,507 missing values generated)
+
+. 
+. drop if popestimate == . | popestimate == 0
+(21,635 observations deleted)
+
+. drop if pcpincome   == . | pcpincome   <= 0
+(1,300 observations deleted)
+
+. 
+. label variable branches_pc   "Total branches per 10,000 population"
+
+. label variable community_pc  "Community bank branches per 10,000 population"
+
+. label variable log_pop       "Log county population"
+
+. label variable log_income    "Log per capita personal income (BEA)"
+
+. 
+. sort fips_county year
+
+. save "$output\County_Panel_Merged.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_Panel_Merged.dta saved
+
+. di "Section 5 complete. County_Panel_Merged.dta: " _N " county-year rows"
+Section 5 complete. County_Panel_Merged.dta: 76428 county-year rows
+
+. di "Education : 2010-2024 vintages (C01 for 2010-2014, C02 for 2015-2024)"
+Education : 2010-2024 vintages (C01 for 2010-2014, C02 for 2015-2024)
+
+. di "Broadband : 2017-2024 vintages (one per year)"
+Broadband : 2017-2024 vintages (one per year)
+
+. 
+. /*====================================================================*
+>    SECTION 6: REGRESSIONS
+>    Y = num_branches or branches_pc
+>    X = lag_log_income, lag_log_pop, pct_bachelors, broadband_rate
+>    Only income and population are lagged (time-varying).
+>    ACS variables used contemporaneously (5-year averages).
+>    Three columns: No FE | County FE | Year FE
+>    Output: Word tables via outreg2
+> ====================================================================*/
+. 
+. use "$output\County_Panel_Merged.dta", clear
+
+. duplicates drop fips_county year, force
+
+Duplicates in terms of fips_county year
+
+(5 observations deleted)
+
+. xtset fips_county year
+       panel variable:  fips_county (unbalanced)
+        time variable:  year, 2000 to 2024, but with gaps
+                delta:  1 unit
+
+. 
+. gen lag_log_income = L.log_income
+(3,089 missing values generated)
+
+. gen lag_log_pop    = L.log_pop
+(3,089 missing values generated)
+
+. 
+. label variable lag_log_income "Log per capita income, t-1"
+
+. label variable lag_log_pop    "Log population, t-1"
+
+. label variable pct_bachelors  "% adults 25+ bachelor's degree"
+
+. label variable broadband_rate "Broadband HH rate"
+
+. 
+. mark insample
+
+. markout insample lag_log_income lag_log_pop pct_bachelors broadband_rate ///
+>     num_branches branches_pc
+
+. keep if insample == 1
+(3,089 observations deleted)
+
+. drop insample
+
+. 
+. di "Regression sample: " _N " county-year observations"
+Regression sample: 73334 county-year observations
+
+. quietly tab fips_county
+
+. di "Unique counties: " r(r)
+Unique counties: 3071
+
+. 
+. capture which outreg2
+
+. if _rc ssc install outreg2
+
+. 
+. * Table A: Number of branches
+. regress num_branches lag_log_income pct_bachelors broadband_rate lag_log_pop, robust
+
+Linear regression                               Number of obs     =     73,334
+                                                F(4, 73329)       =    2712.86
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.4040
+                                                Root MSE          =     52.933
+
+--------------------------------------------------------------------------------
+               |               Robust
+  num_branches |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   28.72853   1.085762    26.46   0.000     26.60044    30.85662
+ pct_bachelors |   1.224608    .032889    37.23   0.000     1.160145     1.28907
+broadband_rate |  -117.4453   3.582803   -32.78   0.000    -124.4675    -110.423
+   lag_log_pop |   27.54573   .4837973    56.94   0.000     26.59749    28.49397
+         _cons |  -495.6918    13.0088   -38.10   0.000     -521.189   -470.1946
+--------------------------------------------------------------------------------
+
+. estimates store A1_OLS
+
+. outreg2 using "$output\Table_NumBranches.doc", replace word ctitle("No FE") label se
+C:\Users\USER\Downloads\Poster_Output\Table_NumBranches.doc
+dir : seeout
+
+. 
+. xtreg num_branches lag_log_income pct_bachelors broadband_rate lag_log_pop, fe robust
+
+Fixed-effects (within) regression               Number of obs     =     73,334
+Group variable: fips_county                     Number of groups  =      3,071
+
+R-sq:                                           Obs per group:
+     within  = 0.0319                                         min =          1
+     between = 0.3447                                         avg =       23.9
+     overall = 0.3394                                         max =         24
+
+                                                F(4,3070)         =     111.70
+corr(u_i, Xb)  = 0.3029                         Prob > F          =     0.0000
+
+                          (Std. Err. adjusted for 3,071 clusters in fips_county)
+--------------------------------------------------------------------------------
+               |               Robust
+  num_branches |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   4.582828   .5399863     8.49   0.000     3.524057    5.641599
+ pct_bachelors |  -.4734903   .0424727   -11.15   0.000    -.5567681   -.3902125
+broadband_rate |  -19.92832   1.712106   -11.64   0.000    -23.28531   -16.57133
+   lag_log_pop |   17.05333   1.706247     9.99   0.000     13.70783    20.39883
+         _cons |  -171.3151   19.49953    -8.79   0.000    -209.5486   -133.0817
+---------------+----------------------------------------------------------------
+       sigma_u |   57.58521
+       sigma_e |  9.6312842
+           rho |  .97278774   (fraction of variance due to u_i)
+--------------------------------------------------------------------------------
+
+. estimates store A2_FE
+
+. outreg2 using "$output\Table_NumBranches.doc", append word ctitle("County FE") label se
+C:\Users\USER\Downloads\Poster_Output\Table_NumBranches.doc
+dir : seeout
+
+. 
+. regress num_branches lag_log_income pct_bachelors broadband_rate lag_log_pop ///
+>     i.year, robust
+
+Linear regression                               Number of obs     =     73,334
+                                                F(27, 73306)      =     444.24
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.4195
+                                                Root MSE          =     52.245
+
+--------------------------------------------------------------------------------
+               |               Robust
+  num_branches |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   70.03674   1.884763    37.16   0.000     66.34261    73.73087
+ pct_bachelors |   .6186822   .0336923    18.36   0.000     .5526455    .6847189
+broadband_rate |  -122.5661   3.924199   -31.23   0.000    -130.2575   -114.8747
+   lag_log_pop |   27.94242   .4893956    57.10   0.000     26.98321    28.90164
+               |
+          year |
+         2002  |  -3.295871   1.100581    -2.99   0.003    -5.453006   -1.138736
+         2003  |  -4.626856   1.082756    -4.27   0.000    -6.749054   -2.504657
+         2004  |  -7.485623   1.105894    -6.77   0.000    -9.653172   -5.318074
+         2005  |  -10.37948   1.153213    -9.00   0.000    -12.63977   -8.119185
+         2006  |  -12.51283   1.192844   -10.49   0.000     -14.8508   -10.17486
+         2007  |  -14.31787   1.248779   -11.47   0.000    -16.76548   -11.87027
+         2008  |  -18.01476   1.303462   -13.82   0.000    -20.56954   -15.45998
+         2009  |  -21.25515   1.408838   -15.09   0.000    -24.01647   -18.49383
+         2010  |  -20.02431    1.40514   -14.25   0.000    -22.77838   -17.27024
+         2011  |  -21.15422   1.472623   -14.36   0.000    -24.04056   -18.26788
+         2012  |   -26.1291   1.530301   -17.07   0.000    -29.12849   -23.12972
+         2013  |  -28.54021   1.542397   -18.50   0.000    -31.56331   -25.51712
+         2014  |  -30.89121   1.567845   -19.70   0.000    -33.96418   -27.81824
+         2015  |  -33.48101   1.575125   -21.26   0.000    -36.56826   -30.39377
+         2016  |  -35.57325   1.577226   -22.55   0.000    -38.66461   -32.48189
+         2017  |  -36.71236   1.565588   -23.45   0.000    -39.78091   -33.64381
+         2018  |  -36.39582     1.5362   -23.69   0.000    -39.40677   -33.38488
+         2019  |  -36.70769   1.516154   -24.21   0.000    -39.67935   -33.73603
+         2020  |  -36.74281   1.498578   -24.52   0.000    -39.68002    -33.8056
+         2021  |  -41.11145   1.547771   -26.56   0.000    -44.14507   -38.07782
+         2022  |  -46.38636   1.613932   -28.74   0.000    -49.54966   -43.22306
+         2023  |  -46.35416   1.593284   -29.09   0.000    -49.47699   -43.23133
+         2024  |   -48.2211   1.609184   -29.97   0.000     -51.3751   -45.06711
+               |
+         _cons |   -890.573   20.30978   -43.85   0.000    -930.3801   -850.7659
+--------------------------------------------------------------------------------
+
+. estimates store A3_YFE
+
+. outreg2 using "$output\Table_NumBranches.doc", append word ctitle("Year FE") label se d
+> rop(*.year)
+C:\Users\USER\Downloads\Poster_Output\Table_NumBranches.doc
+dir : seeout
+
+. 
+. di "Table A saved: Table_NumBranches.doc"
+Table A saved: Table_NumBranches.doc
+
+. 
+. * Table B: Branches per capita
+. regress branches_pc lag_log_income pct_bachelors broadband_rate lag_log_pop, robust
+
+Linear regression                               Number of obs     =     73,334
+                                                F(4, 73329)       =    4952.94
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.3828
+                                                Root MSE          =     2.4085
+
+--------------------------------------------------------------------------------
+               |               Robust
+   branches_pc |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   1.122752   .0430026    26.11   0.000     1.038467    1.207037
+ pct_bachelors |   .0568512   .0014586    38.98   0.000     .0539923      .05971
+broadband_rate |  -.2732162   .1297376    -2.11   0.035    -.5275015    -.018931
+   lag_log_pop |  -1.416157   .0109975  -128.77   0.000    -1.437712   -1.394602
+         _cons |    6.41593   .4139145    15.50   0.000     5.604659    7.227201
+--------------------------------------------------------------------------------
+
+. estimates store B1_OLS
+
+. outreg2 using "$output\Table_BranchesPC.doc", replace word ctitle("No FE") label se
+C:\Users\USER\Downloads\Poster_Output\Table_BranchesPC.doc
+dir : seeout
+
+. 
+. xtreg branches_pc lag_log_income pct_bachelors broadband_rate lag_log_pop, fe robust
+
+Fixed-effects (within) regression               Number of obs     =     73,334
+Group variable: fips_county                     Number of groups  =      3,071
+
+R-sq:                                           Obs per group:
+     within  = 0.0841                                         min =          1
+     between = 0.3196                                         avg =       23.9
+     overall = 0.3074                                         max =         24
+
+                                                F(4,3070)         =     261.35
+corr(u_i, Xb)  = -0.5971                        Prob > F          =     0.0000
+
+                          (Std. Err. adjusted for 3,071 clusters in fips_county)
+--------------------------------------------------------------------------------
+               |               Robust
+   branches_pc |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   .4212683   .0576165     7.31   0.000     .3082975    .5342391
+ pct_bachelors |  -.0207541   .0058276    -3.56   0.000    -.0321806   -.0093276
+broadband_rate |  -3.123424   .1813746   -17.22   0.000    -3.479052   -2.767796
+   lag_log_pop |   -2.28452   .1492792   -15.30   0.000    -2.577217   -1.991823
+         _cons |   26.35453   1.351886    19.49   0.000     23.70384    29.00523
+---------------+----------------------------------------------------------------
+       sigma_u |  3.0744693
+       sigma_e |  .72764475
+           rho |  .94695692   (fraction of variance due to u_i)
+--------------------------------------------------------------------------------
+
+. estimates store B2_FE
+
+. outreg2 using "$output\Table_BranchesPC.doc", append word ctitle("County FE") label se
+C:\Users\USER\Downloads\Poster_Output\Table_BranchesPC.doc
+dir : seeout
+
+. 
+. regress branches_pc lag_log_income pct_bachelors broadband_rate lag_log_pop ///
+>     i.year, robust
+
+Linear regression                               Number of obs     =     73,334
+                                                F(27, 73306)      =     856.27
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.4451
+                                                Root MSE          =      2.284
+
+--------------------------------------------------------------------------------
+               |               Robust
+   branches_pc |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+lag_log_income |   4.455785   .0725534    61.41   0.000     4.313581     4.59799
+ pct_bachelors |   .0005976   .0015971     0.37   0.708    -.0025326    .0037278
+broadband_rate |    1.23098   .1351333     9.11   0.000      .966119     1.49584
+   lag_log_pop |  -1.419792   .0106761  -132.99   0.000    -1.440717   -1.398867
+               |
+          year |
+         2002  |  -.1997451   .0546199    -3.66   0.000    -.3067999   -.0926903
+         2003  |  -.2913471    .055368    -5.26   0.000    -.3998681   -.1828261
+         2004  |  -.4585262   .0551678    -8.31   0.000    -.5666549   -.3503976
+         2005  |   -.637142   .0569237   -11.19   0.000    -.7487121   -.5255718
+         2006  |  -.7446329   .0577631   -12.89   0.000    -.8578484   -.6314175
+         2007  |  -.8493513    .059918   -14.18   0.000    -.9667904   -.7319122
+         2008  |  -1.076658   .0602009   -17.88   0.000    -1.194651   -.9586641
+         2009  |  -1.320176   .0604733   -21.83   0.000    -1.438704   -1.201649
+         2010  |  -1.246863   .0602842   -20.68   0.000     -1.36502   -1.128707
+         2011  |  -1.250264   .0609443   -20.51   0.000    -1.369715   -1.130813
+         2012  |  -1.583724   .0612077   -25.87   0.000    -1.703691   -1.463757
+         2013  |  -1.761267   .0618183   -28.49   0.000     -1.88243   -1.640103
+         2014  |  -1.920973   .0617505   -31.11   0.000    -2.042004   -1.799942
+         2015  |    -2.0966    .063268   -33.14   0.000    -2.220605   -1.972595
+         2016  |  -2.225089   .0646865   -34.40   0.000    -2.351874   -2.098303
+         2017  |  -2.282865   .0656281   -34.78   0.000    -2.411495   -2.154234
+         2018  |  -2.517941   .0667555   -37.72   0.000    -2.648781     -2.3871
+         2019  |  -2.772164   .0676255   -40.99   0.000     -2.90471   -2.639618
+         2020  |  -3.020317   .0684739   -44.11   0.000    -3.154525   -2.886108
+         2021  |  -3.495647   .0709346   -49.28   0.000    -3.634678   -3.356615
+         2022  |  -4.004809   .0736356   -54.39   0.000    -4.149134   -3.860483
+         2023  |   -4.16019   .0747773   -55.63   0.000    -4.306753   -4.013626
+         2024  |  -4.429287    .075947   -58.32   0.000    -4.578143   -4.280431
+               |
+         _cons |  -26.55061   .6794175   -39.08   0.000    -27.88226   -25.21895
+--------------------------------------------------------------------------------
+
+. estimates store B3_YFE
+
+. outreg2 using "$output\Table_BranchesPC.doc", append word ctitle("Year FE") label se dr
+> op(*.year)
+C:\Users\USER\Downloads\Poster_Output\Table_BranchesPC.doc
+dir : seeout
+
+. 
+. di "Table B saved: Table_BranchesPC.doc"
+Table B saved: Table_BranchesPC.doc
+
+. di "Section 6 complete."
+Section 6 complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 7: FINANCIAL SOPHISTICATION MAPS
+>    Use most recent year per county for mapping
+> ====================================================================*/
+. 
+. use "$output\County_Panel_Merged.dta", clear
+
+. bysort fips_county (year): keep if _n == _N
+(73,347 observations deleted)
+
+. keep fips_county pct_bachelors broadband_rate
+
+. duplicates drop fips_county, force
+
+Duplicates in terms of fips_county
+
+(0 observations are duplicates)
+
+. tostring fips_county, gen(fips_str) format("%05.0f")
+fips_str generated as str5
+
+. save "$output\County_Soph_CS.dta", replace
+file C:\Users\USER\Downloads\Poster_Output\County_Soph_CS.dta saved
+
+. 
+. * Education map
+. use "$output\counties_data.dta", clear
+
+. rename GEOID fips_str
+
+. destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+. drop if fips_num >= 2000  & fips_num < 3000
+(30 observations deleted)
+
+. drop if fips_num >= 15000 & fips_num < 16000
+(5 observations deleted)
+
+. drop if fips_num > 56999
+(91 observations deleted)
+
+. drop fips_num
+
+. merge 1:1 fips_str using "$output\County_Soph_CS.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           102
+        from master                        65  (_merge==1)
+        from using                         37  (_merge==2)
+
+    matched                             3,044  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(37 observations deleted)
+
+. drop _merge
+
+. spmap pct_bachelors using "$output\counties_coor.dta", id(mapid)     ///
+>     fcolor(Reds)                                                        ///
+>     clmethod(custom) clbreaks(0 10 20 30 40 50 70)                     ///
+>     ocolor(white ..) osize(vvthin ..)                                   ///
+>     title("% Adults 25+ with Bachelor's Degree", size(large) color(navy)) ///
+>     legend(title("Percent (%)", size(small)) size(small)                ///
+>            position(4) ring(0) region(lwidth(none) color(none)))        ///
+>     graphregion(color(white) margin(zero)) plotregion(margin(zero))     ///
+>     xsize(10) ysize(7)
+
+. graph export "$output\Figure5_Map_Education.png", replace width(3600)
+(file C:\Users\USER\Downloads\Poster_Output\Figure5_Map_Education.png written in PNG form
+> at)
+
+. di "Education map saved."
+Education map saved.
+
+. 
+. * Broadband map
+. use "$output\counties_data.dta", clear
+
+. rename GEOID fips_str
+
+. destring fips_str, gen(fips_num)
+fips_str: all characters numeric; fips_num generated as long
+
+. drop if fips_num >= 2000  & fips_num < 3000
+(30 observations deleted)
+
+. drop if fips_num >= 15000 & fips_num < 16000
+(5 observations deleted)
+
+. drop if fips_num > 56999
+(91 observations deleted)
+
+. drop fips_num
+
+. merge 1:1 fips_str using "$output\County_Soph_CS.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           102
+        from master                        65  (_merge==1)
+        from using                         37  (_merge==2)
+
+    matched                             3,044  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge == 2
+(37 observations deleted)
+
+. drop _merge
+
+. gen broadband_pct = broadband_rate * 100
+(65 missing values generated)
+
+. spmap broadband_pct using "$output\counties_coor.dta", id(mapid)     ///
+>     fcolor(Greens)                                                      ///
+>     clmethod(custom) clbreaks(0 50 60 70 80 90 100)                    ///
+>     ocolor(white ..) osize(vvthin ..)                                   ///
+>     title("% Households with Broadband Internet", size(large) color(navy)) ///
+>     legend(title("Percent (%)", size(small)) size(small)                ///
+>            position(4) ring(0) region(lwidth(none) color(none)))        ///
+>     graphregion(color(white) margin(zero)) plotregion(margin(zero))     ///
+>     xsize(10) ysize(7)
+
+. graph export "$output\Figure6_Map_Broadband.png", replace width(3600)
+(file C:\Users\USER\Downloads\Poster_Output\Figure6_Map_Broadband.png written in PNG form
+> at)
+
+. di "Broadband map saved."
+Broadband map saved.
+
+. 
+. di "Section 7 complete."
+Section 7 complete.
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 8: EXCEL OUTPUT TABLES
+> ====================================================================*/
+. 
+. * Sheet 1: Annual branch counts
+. use "$output\YearLevel_Summary.dta", clear
+
+. gen community_pct = community_br / total_br * 100
+
+. gen regional_pct  = regional_br  / total_br * 100
+
+. gen megabank_pct  = mega_br      / total_br * 100
+
+. gen savings_pct   = savings_br   / total_br * 100
+
+. format community_pct regional_pct megabank_pct savings_pct %5.1f
+
+. export excel year total_br community_br regional_br mega_br savings_br ///
+>     community_pct regional_pct megabank_pct savings_pct                ///
+>     using "$output\Analysis_Tables.xlsx",                               ///
+>     sheet("Summary_Stats") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 1 saved"
+Sheet 1 saved
+
+. 
+. * Sheet 2: County comparison
+. use "$output\County_Comparison.dta", clear
+
+. gsort state county_name
+
+. rename county_name          County
+
+. rename state                State
+
+. rename branches_1994        Branches_1994
+
+. rename branches_latest_fill Branches_2024
+
+. rename branch_change        Branch_Change
+
+. rename pct_change           Pct_Change
+
+. rename desert               Banking_Desert
+
+. rename ct_flag              CT_Artifact
+
+. format Pct_Change %6.1f
+
+. export excel County State Branches_1994 Branches_2024                 ///
+>     Branch_Change Pct_Change Banking_Desert CT_Artifact               ///
+>     using "$output\Analysis_Tables.xlsx",                              ///
+>     sheet("County_Change") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 2 saved"
+Sheet 2 saved
+
+. 
+. * Sheet 3: Banking deserts
+. use "$output\County_Comparison.dta", clear
+
+. keep if desert == 1
+(3,108 observations deleted)
+
+. gsort ct_flag state county_name
+
+. gen Notes = cond(ct_flag == 0, "True banking desert", ///
+>     "CT reorganization - not a true desert")
+
+. rename county_name   County
+
+. rename state         State
+
+. rename branches_1994 Branches_in_1994
+
+. export excel County State Branches_in_1994 Notes                       ///
+>     using "$output\Analysis_Tables.xlsx",                               ///
+>     sheet("Banking_Deserts") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 3 saved"
+Sheet 3 saved
+
+. 
+. * Sheet 4: Deserts by state
+. import delimited "$output\Table_DesertsByState.csv", varnames(1) clear
+(3 vars, 12 obs)
+
+. export excel using "$output\Analysis_Tables.xlsx",                     ///
+>     sheet("Deserts_by_State") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 4 saved"
+Sheet 4 saved
+
+. 
+. * Sheet 5: Top 10 losers
+. use "$output\County_Comparison.dta", clear
+
+. drop if state == "CT"
+(17 observations deleted)
+
+. keep if branches_1994 > 0 & branches_1994 != .
+(16 observations deleted)
+
+. gsort branch_change
+
+. keep in 1/10
+(3,093 observations deleted)
+
+. rename county_name          County
+
+. rename state                State
+
+. rename branches_1994        Branches_1994
+
+. rename branches_latest_fill Branches_2024
+
+. rename branch_change        Branch_Change
+
+. rename pct_change           Pct_Change
+
+. format Pct_Change %6.1f
+
+. export excel County State Branches_1994 Branches_2024 Branch_Change Pct_Change ///
+>     using "$output\Analysis_Tables.xlsx",                                        ///
+>     sheet("Top10_Losers") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 5 saved"
+Sheet 5 saved
+
+. 
+. * Sheet 6: Top 10 gainers
+. use "$output\County_Comparison.dta", clear
+
+. drop if state == "CT"
+(17 observations deleted)
+
+. keep if branches_1994 > 0 & branches_1994 != .
+(16 observations deleted)
+
+. gsort -branch_change
+
+. keep in 1/10
+(3,093 observations deleted)
+
+. rename county_name          County
+
+. rename state                State
+
+. rename branches_1994        Branches_1994
+
+. rename branches_latest_fill Branches_2024
+
+. rename branch_change        Branch_Change
+
+. rename pct_change           Pct_Change
+
+. format Pct_Change %6.1f
+
+. export excel County State Branches_1994 Branches_2024 Branch_Change Pct_Change ///
+>     using "$output\Analysis_Tables.xlsx",                                        ///
+>     sheet("Top10_Gainers") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 6 saved"
+Sheet 6 saved
+
+. 
+. * Sheet 7: Region summary
+. import delimited "$output\Table_RegionSummary.csv", varnames(1) clear
+(5 vars, 8 obs)
+
+. export excel using "$output\Analysis_Tables.xlsx",                     ///
+>     sheet("Region_Summary") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 7 saved"
+Sheet 7 saved
+
+. 
+. * Sheet 8: Branch by type per year
+. use "$output\YearLevel_Summary.dta", clear
+
+. export excel year total_br community_br regional_br mega_br savings_br ///
+>     using "$output\Analysis_Tables.xlsx",                               ///
+>     sheet("Branch_by_Type_Year") sheetreplace firstrow(varlabels)
+file C:\Users\USER\Downloads\Poster_Output\Analysis_Tables.xlsx saved
+
+. di "Sheet 8 saved"
+Sheet 8 saved
+
+. 
+. di "ALL EXCEL SHEETS SAVED: Analysis_Tables.xlsx"
+ALL EXCEL SHEETS SAVED: Analysis_Tables.xlsx
+
+. 
+. 
+. /*====================================================================*
+>    SECTION 9: FINISH
+> ====================================================================*/
+. 
+. di ""
+
+
+. di "====================================================="
+=====================================================
+
+. di "ANALYSIS COMPLETE: " c(current_date) " " c(current_time)
+ANALYSIS COMPLETE: 19 Apr 2026 01:14:08
+
+. di "Outputs saved to: $output"
+Outputs saved to: C:\Users\USER\Downloads\Poster_Output
+
+. di ""
+
+
+. di "FIGURES:"
+FIGURES:
+
+. di "  Figure1a_AllTypes_Trend.png"
+  Figure1a_AllTypes_Trend.png
+
+. di "  Figure1b_Community_Trend.png"
+  Figure1b_Community_Trend.png
+
+. di "  Figure2_BankType_Compare.png"
+  Figure2_BankType_Compare.png
+
+. di "  Figure3_RegionShare.png"
+  Figure3_RegionShare.png
+
+. di "  Figure4a_Map_1994.png"
+  Figure4a_Map_1994.png
+
+. di "  Figure4b_Map_2024.png"
+  Figure4b_Map_2024.png
+
+. di "  Figure5_Map_Education.png"
+  Figure5_Map_Education.png
+
+. di "  Figure6_Map_Broadband.png"
+  Figure6_Map_Broadband.png
+
+. di ""
+
+
+. di "REGRESSION TABLES:"
+REGRESSION TABLES:
+
+. di "  Table_NumBranches.doc"
+  Table_NumBranches.doc
+
+. di "  Table_BranchesPC.doc"
+  Table_BranchesPC.doc
+
+. di ""
+
+
+. di "EXCEL: Analysis_Tables.xlsx (8 sheets)"
+EXCEL: Analysis_Tables.xlsx (8 sheets)
+
+. di "====================================================="
+=====================================================
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\USER\Downloads\Poster_Output\Poster_Analysis_Log.txt
+  log type:  text
+ closed on:  19 Apr 2026, 01:14:08
+-----------------------------------------------------------------------------------------
